@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://cempsyrpp7rbl"]
+
+[ext_resource type="Script" path="res://enemy.gd" id="1_1elyr"]
+[ext_resource type="Texture2D" uid="uid://dtrgasnywoji3" path="res://enemy sprites/WalkingPurple/SpiderWalking1.png" id="1_cs2uq"]
+[ext_resource type="Texture2D" uid="uid://b8h5hyq7xy8ck" path="res://enemy sprites/WalkingPurple/SpiderWalking2.png" id="2_tm6nm"]
+[ext_resource type="Texture2D" uid="uid://bth26ryovskbp" path="res://enemy sprites/WalkingPurple/SpiderWalking3.png" id="3_xyhb1"]
+[ext_resource type="Texture2D" uid="uid://bakksvshss3m8" path="res://enemy sprites/WalkingPurple/SpiderWalking4.png" id="4_reo4b"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ijd7t"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fkeho"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_cs2uq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_tm6nm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xyhb1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_reo4b")
+}],
+"loop": true,
+"name": &"SpiderWalk",
+"speed": 5.0
+}]
+
+[node name="Enemy" type="RigidBody2D" groups=["enemies"]]
+position = Vector2(306, 71)
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_1elyr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+scale = Vector2(2.1128, 1.54244)
+shape = SubResource("CapsuleShape2D_ijd7t")
+metadata/_edit_group_ = true
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+enable_node_path = NodePath("../CollisionShape2D")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_fkeho")
+animation = &"SpiderWalk"
+frame_progress = 0.583323
+speed_scale = 3.0
+metadata/_edit_group_ = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

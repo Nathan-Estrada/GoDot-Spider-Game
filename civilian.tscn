@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://dc4xxnci37vwk"]
+
+[ext_resource type="Texture2D" uid="uid://dt4oj1le2neqh" path="res://civillian sprites/civillian 1.png" id="1_dso0u"]
+[ext_resource type="Script" path="res://civilian.gd" id="1_fsbn7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3xodq"]
+atlas = ExtResource("1_dso0u")
+region = Rect2(32, 0, 8, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g1a76"]
+atlas = ExtResource("1_dso0u")
+region = Rect2(40, 0, 8, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r2ukk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3xodq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g1a76")
+}],
+"loop": true,
+"name": &"CivWalk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6iuv1"]
+size = Vector2(25, 36)
+
+[node name="Civilian" type="RigidBody2D" groups=["civilians"]]
+position = Vector2(851, 143)
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_fsbn7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_r2ukk")
+animation = &"CivWalk"
+frame_progress = 0.528478
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_6iuv1")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

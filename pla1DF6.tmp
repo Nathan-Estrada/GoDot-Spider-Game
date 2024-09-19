@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://bbw7xg302jxl1"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_8nbhb"]
+[ext_resource type="Texture2D" uid="uid://cdycylvaeqrh1" path="res://player sprites/idle/enemy3idle1.png" id="1_xd73x"]
+[ext_resource type="Texture2D" uid="uid://da5r4b5m77n64" path="res://player sprites/walk/enemy3walk1.png" id="2_b5wyv"]
+[ext_resource type="Texture2D" uid="uid://c4lrsya2nst3f" path="res://player sprites/walk/enemy3walk2.png" id="3_63dg7"]
+[ext_resource type="Texture2D" uid="uid://cr0hg3off2xwt" path="res://player sprites/walk/enemy3walk3.png" id="4_gi7p3"]
+[ext_resource type="Texture2D" uid="uid://ro10f8de2n7j" path="res://player sprites/walk/enemy3walk4.png" id="5_j1ksw"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s3pmx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_xd73x")
+}],
+"loop": true,
+"name": &"stand",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_b5wyv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_63dg7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_gi7p3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_j1ksw")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h5w5p"]
+radius = 24.0
+height = 62.0
+
+[node name="Player" type="Area2D"]
+position = Vector2(782, 414)
+script = ExtResource("1_8nbhb")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = -1.5708
+scale = Vector2(0.991379, 1)
+sprite_frames = SubResource("SpriteFrames_s3pmx")
+animation = &"walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_h5w5p")
+
+[node name="Gun" type="Marker2D" parent="."]
+position = Vector2(26, 5)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

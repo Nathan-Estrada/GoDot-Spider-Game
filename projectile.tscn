@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://tgdqseh43vg1"]
+
+[ext_resource type="Script" path="res://projectile.gd" id="1_xropc"]
+[ext_resource type="Texture2D" uid="uid://bcsc4toxo0o0g" path="res://player sprites/blue_laser.png" id="2_7k1fm"]
+[ext_resource type="AudioStream" uid="uid://brvifm3trjurf" path="res://audio/laserfire02.ogg" id="3_5c8ac"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rvrmw"]
+size = Vector2(34, 18)
+
+[node name="Projectile" type="Area2D"]
+position = Vector2(88, 112)
+script = ExtResource("1_xropc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(5.05001, 3.8)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_7k1fm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5.04994, 3.79996)
+scale = Vector2(1.08694, 0.257376)
+shape = SubResource("RectangleShape2D_rvrmw")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_5c8ac")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

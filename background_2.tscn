@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dq4v80es8nawg"]
+
+[ext_resource type="Texture2D" uid="uid://b7gmm5vk0x2ut" path="res://background sprites/lava.png" id="1_ma44d"]
+[ext_resource type="Script" path="res://background_2.gd" id="2_ptxle"]
+
+[node name="Sprite2D" type="Sprite2D"]
+position = Vector2(608, 392)
+texture = ExtResource("1_ma44d")
+script = ExtResource("2_ptxle")

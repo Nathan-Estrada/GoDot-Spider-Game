@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3qkdg85tmtqy"]
+
+[ext_resource type="Script" path="res://spawn_civ.gd" id="1_66iti"]
+
+[sub_resource type="Curve2D" id="Curve2D_1271i"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 8, 8, 0, 0, 0, 0, 1144, 0, 0, 0, 0, 0, 1144, 640, 0, 0, 0, 0, 8, 640, 0, 0, 0, 0, 8, 8)
+}
+point_count = 5
+
+[node name="spawn_civ" type="Node2D"]
+script = ExtResource("1_66iti")
+
+[node name="NPC_Path" type="Path2D" parent="."]
+curve = SubResource("Curve2D_1271i")
+
+[node name="CivilianSpawnLocation" type="PathFollow2D" parent="NPC_Path"]
+position = Vector2(8, 8)
+rotation = -0.00704214

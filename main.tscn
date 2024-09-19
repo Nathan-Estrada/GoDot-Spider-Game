@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://bpffcr43qspyp"]
+
+[ext_resource type="Script" path="res://Main.gd" id="1_rj3sj"]
+[ext_resource type="PackedScene" uid="uid://bbw7xg302jxl1" path="res://player.tscn" id="3_5s22a"]
+[ext_resource type="PackedScene" uid="uid://dbl7gfv4uspt1" path="res://grass.tscn" id="4_jasbp"]
+[ext_resource type="PackedScene" uid="uid://dq4v80es8nawg" path="res://background_2.tscn" id="5_xnu6e"]
+[ext_resource type="AudioStream" uid="uid://b6vd0xgj1dahg" path="res://audio/Joy Ride.wav" id="6_ui2c1"]
+[ext_resource type="PackedScene" uid="uid://cwe2p5eoodw7y" path="res://hud.tscn" id="7_blirv"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_rj3sj")
+
+[node name="GrassBackground" parent="." instance=ExtResource("4_jasbp")]
+
+[node name="SecondBackground" parent="." instance=ExtResource("5_xnu6e")]
+visible = false
+
+[node name="Player" parent="." instance=ExtResource("3_5s22a")]
+position = Vector2(500, 448)
+
+[node name="EnemySpawnTimer" type="Timer" parent="."]
+wait_time = 0.26
+
+[node name="PlayerSpawnPoint" type="Marker2D" parent="."]
+position = Vector2(500, 450)
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="Hud" parent="." instance=ExtResource("7_blirv")]
+
+[node name="CivilianSpawnTimer" type="Timer" parent="."]
+wait_time = 0.26
+
+[node name="GameTimer" type="Timer" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_ui2c1")
+
+[connection signal="game_over" from="Player" to="." method="game_over"]
+[connection signal="hit" from="Player" to="Hud" method="_on_player_hit"]
+[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="game_over" from="Hud" to="." method="game_over"]
+[connection signal="play_again" from="Hud" to="." method="_on_play_again"]
+[connection signal="start_game" from="Hud" to="." method="new_game"]
+[connection signal="timeout" from="CivilianSpawnTimer" to="." method="_on_civilian_spawn_timer_timeout"]
+[connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]

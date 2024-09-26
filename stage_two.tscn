@@ -20,6 +20,8 @@ script = ExtResource("1_pfix5")
 
 [node name="GrassBackground" parent="." instance=ExtResource("3_64nvg")]
 
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GrassBackground"]
+
 [node name="SecondBackground" parent="." instance=ExtResource("4_yabww")]
 visible = false
 
@@ -38,6 +40,11 @@ position = Vector2(500, 448)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_hut6w")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(0, 0, 1144, 0, 1144, 640, 8, 640, -8, 0, -16, 0, 0, 648, 1152, 648, 1152, -8, 0, -8)
 
 [connection signal="play_again" from="Hud" to="." method="_on_play_again"]
 [connection signal="game_over" from="Player" to="." method="_on_game_over"]

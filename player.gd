@@ -6,16 +6,16 @@ signal game_over
 @export var projectile : PackedScene
 
 var screen_size
-var max_hp = GlobalValues.HP
+
+#Every time a player is instantiated player's health is reset
+var max_hp = GlobalValues.maxHP
 var hp = max_hp
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
 	projectile = load("res://projectile.tscn")
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var velocity = Vector2.ZERO
 	var mouse_position = get_local_mouse_position()
@@ -28,10 +28,11 @@ func _process(delta):
 		velocity.x +=1
 	if Input.is_action_pressed("move_left"):
 		velocity.x -=1
-	#TODO: Input mapping for firing weapon
+		
 	if Input.is_action_just_pressed("fire_weapon"):
 		shoot()
 	
+	#Walk animation only plays during movement
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
 		$AnimatedSprite2D.play()
@@ -47,6 +48,7 @@ func shoot():
 	beam.transform = $Gun.global_transform
 	
 func _on_body_entered(body: Node2D):
+	#Player only receives damage when touched by spider or ghost
 	if body.has_method("enemyHit") or body.has_method("ghostHit"):
 		$AudioStreamPlayer2D.play()
 		GlobalValues.HP -= 1

@@ -4,12 +4,11 @@ var player_scene:PackedScene = load("res://player.tscn")
 var temp = 0
 var civKills = GlobalValues.civKillCount
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	set_process(true)
 	$Hud/Start.hide()
 	$Hud/PlayAgain.hide()
-		#Clear NPCs on screen
+	#Clear NPCs on screen
 	get_tree().call_group("enemies", "queue_free")
 	get_tree().call_group("civilians", "queue_free")
 	
@@ -21,8 +20,7 @@ func _ready():
 	
 	#Stage 2 activates if player has killed civilians (Most likely outcome)
 	if (civKills > 0):
-		#Freeze player until all ghosts are spawned to prevent player from killing
-		#ghosts before they can move
+		#Freeze player until all ghosts are spawned to prevent player from killing ghosts before they can move
 		$Player.set_process(false)
 		$Hud/StageTwoLabel.hide()
 		await get_tree().create_timer(2).timeout
@@ -30,26 +28,27 @@ func _ready():
 	#Player skips stage 2 entirely if they don't kill civilians
 	else:
 		$Hud/StageTwoLabel.hide()
-		$Hud.show_stageTwo_text("No civilians were harmed in extermination. Great job!")
+		$Hud.show_GameOver_text("No civilians were harmed in extermination. Great job!")
 		$Hud.show_PlayAgain_button()
 	
 func _process(delta):
 	var HP = str(GlobalValues.HP)
 	$Hud.show_HP("HP: " + HP)
+	#Only executes after all ghosts have spawned and been slayed
 	if GlobalValues.ghostKillCount > 0 and GlobalValues.ghostCount <= 0:
-		print("All ghosts dead")
+		$Hud.show_GameOver_text("You killed them all. Great job....")
 		set_process(false)
 		$Hud.show_PlayAgain_button()
 		
 func spawn_ghosts():
 	$AudioStreamPlayer2D.play()
 	for i in range(1, civKills +1):
-		$Hud.show_StageTwo_LabelTwo_text("you killed " + str(i) + " innocent bystanders")
+		$Hud.show_stageTwo_text("You killed " + str(i) + " innocent bystanders")
 		spawn_ghost()
 		temp += 1
 		await get_tree().create_timer(.2).timeout
 	await get_tree().create_timer(3).timeout
-	$Hud/StageTwoLabelTwo.hide()
+	$Hud/StageTwoLabel.hide()
 	$GrassBackground.visible = not $GrassBackground.visible
 	$SecondBackground.visible = true
 	$Player.set_process(true) #Unfreeze player once all ghosts spawn
@@ -80,7 +79,7 @@ func spawn_ghost():
 func _on_game_over():
 	$Hud/TimerLabel.hide()
 	if GlobalValues.HP <= 0:
-		$Hud.show_NoCasualties_text("YOU DIED")
+		$Hud.show_GameOver_text("YOU DIED")
 		$Hud.show_PlayAgain_button()
 
 func _on_play_again():

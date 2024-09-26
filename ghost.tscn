@@ -1,8 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://b3yhoubqtcxgp"]
+[gd_scene load_steps=13 format=3 uid="uid://b3yhoubqtcxgp"]
 
 [ext_resource type="Script" path="res://ghost.gd" id="1_6phwa"]
 [ext_resource type="Texture2D" uid="uid://d2uhxxypvn8gc" path="res://demon sprites/RG-ezgif.com-gif-to-sprite-converter.png" id="2_su0ue"]
 [ext_resource type="AudioStream" uid="uid://71lqfmwvnlc8" path="res://audio/ghostScream.mp3" id="3_5mwow"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_sbd2m"]
+bounce = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fbwmc"]
 size = Vector2(48, 56)
@@ -60,7 +63,9 @@ animations = [{
 [node name="Ghost" type="RigidBody2D"]
 position = Vector2(960, 136)
 collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_sbd2m")
 gravity_scale = 0.0
+contact_monitor = true
 script = ExtResource("1_6phwa")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

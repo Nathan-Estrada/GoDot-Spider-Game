@@ -6,24 +6,19 @@ var spawn_enemy:PackedScene = load("res://spawn_enemy.tscn")
 var spawn_civ:PackedScene = load("res://spawn_civ.tscn")
 
 var gameTime
-var temp = 0
 var screenSize = Vector2(1152.0, 648.0)
-var max_HP = 10
 
 func new_game():
-	#get_tree().change_scene_to_file("res://main.tscn")
-	#get_tree().reload_current_scene()
-	GlobalValues.HP = max_HP
+	GlobalValues.HP = GlobalValues.maxHP
 	GlobalValues.enemyKillCount = 0
 	GlobalValues.civKillCount = 0
 	GlobalValues.ghostKillCount = 0
 	GlobalValues.ghostCount = 0
 	print("NEW GAME")
-	gameTime = 5
+	gameTime = 3
 	
 	$Player.start($PlayerSpawnPoint.position)
 	$Player.show()
-	#$Player.hp = $Player.max_hp
 	$StartTimer.start()
 	$Hud.show_readyText("KILL AS MANY SPIDERS AS YOU CAN")
 	$Hud.update_time(gameTime)
@@ -43,7 +38,7 @@ func game_over():
 	$Hud/TimerLabel.hide()
 	$AudioStreamPlayer2D.stop()
 	if GlobalValues.HP <= 0:
-		$Hud.show_NoCasualties_text("YOU DIED")
+		$Hud.show_GameOver_text("YOU DIED")
 		$Hud.show_PlayAgain_button()
 	
 func _on_enemy_spawn_timer_timeout():

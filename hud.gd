@@ -18,14 +18,9 @@ func show_stageTwo_text(text):
 	$StageTwoLabel.show()
 	$StageTwoTimer.start()
 	
-func show_StageTwo_LabelTwo_text(text):
-	$StageTwoLabelTwo.text = text
-	$StageTwoLabelTwo.show()
-	$StageTwoLabelTwoTimer.start()
-	
-func show_NoCasualties_text(text):
-	$NoCasualties.text = text
-	$NoCasualties.show()
+func show_GameOver_text(text):
+	$GameOverLabel.text = text
+	$GameOverLabel.show()
 	
 func _start_press():
 	$Start.hide()
@@ -41,16 +36,12 @@ func update_time(time):
 func _on_stage_two_timer_timeout():
 	$StageTwoLabel.hide()
 	
-func _on_stage_two_label_two_timer_timeout():
-	$StageTwoLabelTwo.hide()
-
 func show_PlayAgain_button():
 	$PlayAgain.show()
 
 func _on_play_again_pressed():
-	print("PRESSED")
 	$PlayAgain.hide()
-	$NoCasualties.hide()
+	$GameOverLabel.hide()
 	play_again.emit()
 
 #Updates HP displayed upon player getting hit

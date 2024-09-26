@@ -15,7 +15,7 @@ func new_game():
 	GlobalValues.ghostKillCount = 0
 	GlobalValues.ghostCount = 0
 	print("NEW GAME")
-	gameTime = 3
+	gameTime = 45
 	
 	$Player.start($PlayerSpawnPoint.position)
 	$Player.show()

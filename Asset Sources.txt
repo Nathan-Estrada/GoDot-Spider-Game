@@ -1,0 +1,15 @@
+Assets Sources
+
+Player Sounds: https://opengameart.org/content/11-male-human-paindeath-sounds
+Ghost Sprite: https://opengameart.org/content/bunch-of-ghosts
+Topdown Player Sprite: https://aztrakatze.itch.io/futuretanknsoldier
+Spiders: https://camacebra.itch.io/spider-pixel-art-pack-16x16
+Civillians: https://opengameart.org/content/8x12-people
+Projectiles: https://opengameart.org/content/3-lasers
+Projectile Sounds: https://opengameart.org/content/sci-fi-laser-fire-sfx
+Lava Background: https://opengameart.org/content/lava-background-6-screen-resolutions
+HorrorGhostScream: https://opengameart.org/content/phantom-scream
+Stage 1 Music: https://opengameart.org/content/joy-ride
+Stage 2 Music: https://opengameart.org/content/unpleasant-hunch
+HUD Font: https://fontlibrary.org/en/font/semyon-soviet
+Button Font: https://fontlibrary.org/en/font/merom-sans
